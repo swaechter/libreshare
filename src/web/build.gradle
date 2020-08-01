@@ -53,7 +53,7 @@ tasks.withType(JavaCompile) {
     options.forkOptions.jvmArgs.add("-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop")
     options.compilerArgs.addAll([
             '-parameters',
-            '-Amicronaut.processing.incremental=true',
+            //'-Amicronaut.processing.incremental=true',
             '-Amicronaut.processing.annotations=ch.swaechter.libreshare.*',
             "-Amicronaut.processing.group=$project.group",
             "-Amicronaut.processing.module=$project.name",

@@ -1,0 +1,168 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: secaguard-storage
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: libreshare-storage-claim
+  labels:
+    app: polling-app
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: libreshare-database
+  labels:
+    app: libreshare-web
+spec:
+  selector:
+    matchLabels:
+      app: libreshare-web
+      tier: postgresql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: libreshare-web
+        tier: postgresql
+    spec:
+      containers:
+        - image: postgres:13-alpine
+          name: postgresql
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-name
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-password
+          ports:
+            - containerPort: 5432
+              name: postgresql
+          volumeMounts:
+            - name: libreshare-storage
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: libreshare-storage
+          persistentVolumeClaim:
+            claimName: libreshare-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: libreshare-database
+  labels:
+    app: libreshare-web
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: libreshare-web
+    tier: postgresql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: libreshare-base
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "2"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: libreshare-storage
+              mountPath: /data
+          env:
+            - name: LIBRESHARE_WEB_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: web-secret
+
+            - name: LIBRESHARE_DATABASE_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-hostname
+            - name: LIBRESHARE_DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-port
+            - name: LIBRESHARE_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-name
+            - name: LIBRESHARE_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-username
+            - name: LIBRESHARE_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: libreshare-secrets
+                  key: database-password
+      volumes:
+        - name: libreshare-storage
+          persistentVolumeClaim:
+            claimName: libreshare-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
