@@ -12,7 +12,7 @@ set -e
 LIBRESHARE_VERSION=0.0.1
 LIBRESHARE_BUILD_NUMBER=00001
 LIBRESHARE_AUTHOR_NAME="Simon Wächter"
-LIBRESHARE_AUTHOR_EMAIL="simon.waechter@secacon.com"
+LIBRESHARE_AUTHOR_EMAIL="waechter.simon@gmail.com"
 
 # Java version
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
