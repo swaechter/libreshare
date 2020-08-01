@@ -1,0 +1,12 @@
+# Build system
+.gradle/
+build/
+out/
+
+# Packaging
+packages/rpm/libreshare-*
+packages/rpm/rpmbuild
+
+# IDE from JetBrains
+.idea/
+*.iml

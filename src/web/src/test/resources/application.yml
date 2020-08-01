@@ -1,0 +1,11 @@
+libreshare:
+  web:
+    secret: k2kjeueeushj2h3jjheshushhuih2hi2hh3hehshahh1h1ehwh2iehhshahhithdiuehwi
+  database:
+    hostname: unused
+    port: 0
+    name: libreshare
+    username: libreshare
+    password: 123456aA
+server:
+  port: 9999

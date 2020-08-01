@@ -1,0 +1,5 @@
+include 'client'
+include 'web'
+
+project(':client').projectDir = "$rootDir/src/client" as File
+project(':web').projectDir = "$rootDir/src/web" as File
