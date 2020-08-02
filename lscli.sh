@@ -23,32 +23,45 @@ SUBTITLE="\e[1m"
 COMMAND="\e[32m"
 CLEAN="\e[0m"
 
-function pushd () {
-    command pushd "$@" > /dev/null
+function pushd() {
+    command pushd "$@" >/dev/null
 }
 
-function popd () {
-    command popd "$@" > /dev/null
+function popd() {
+    command popd "$@" >/dev/null
 }
 
-function setupProject () {
-    echo "Going to setup all tools"
+function checkProject() {
+    echo "Going to check all tools"
 
-    # TODO: Check if Kubernetes is set up
+    # Check if Docker is installed
+    if ! command -v docker &>/dev/null; then
+        echo "Docker was not found on the system! Please use this guide to install it: https://docs.docker.com/engine/install/ubuntu/"
+        exit 1
+    fi
 
-    # TODO: Check if Git is set up
-    # Install all required development tools
-    sudo apt-get install -y git
+    # Check if Minikube is installed
+    if ! command -v minikube &>/dev/null; then
+        echo "Minikube was not found on the system. Please use this guide to install it: https://kubernetes.io/docs/tasks/tools/install-minikube/"
+    fi
 
-    # Install Skaffold
-    curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
-    sudo chmod +x skaffold
-    sudo mv skaffold /usr/local/bin/
+    # Check if Skaffold is installed
+    if ! command -v skaffold &>/dev/null; then
+        echo "Skaffold was not found on the system. Please use this guide to install it: https://skaffold.dev/docs/install/"
+    fi
 
-    echo "Done setting up all tools"
+    # Check if Git is installed
+    if ! command -v git &>/dev/null; then
+        echo "Git was not found on the system! Please install it via package manager"
+        exit 1
+    fi
+
+    # TODO: Check RPM build tools on RPM based systems
+
+    echo "Done checking all tools"
 }
 
-function cleanProject () {
+function cleanProject() {
     echo "Going to clean the project"
 
     # Clean the project build
@@ -57,7 +70,7 @@ function cleanProject () {
     echo "Done cleaning the project"
 }
 
-function buildProject () {
+function buildProject() {
     echo "Going to build the project"
 
     # Build the project while skipping the tests
@@ -66,14 +79,13 @@ function buildProject () {
     echo "Done building the project"
 }
 
-function developProject () {
+function developProject() {
     echo "Going to run the development build"
 
-    # Start MiniKube
+    # Start Minikube
     minikube start
-    minikube -p minikube docker-env
 
-    # Make MiniKube use the Docker registry of the host
+    # Make Minikube use the Docker registry of the host
     eval "$(minikube docker-env)"
 
     # Build the base images
@@ -97,7 +109,7 @@ function developProject () {
     skaffold dev --port-forward
 }
 
-function packageProject () {
+function packageProject() {
     echo "Going to package the project"
 
     # Create the local RPM development tree
@@ -118,42 +130,42 @@ function packageProject () {
     echo "Done packaging the project"
 }
 
-function deployProject () {
+function deployProject() {
     echo "Going to deploy the project"
 
     echo "Done deploying the project"
 }
 
-function installLibreshare () {
+function installLibreshare() {
     echo "Going to install Libreshare"
 
     echo "Done installing Libreshare"
 }
 
-function upgradeLibreshare () {
+function upgradeLibreshare() {
     echo "Going to upgrade Libreshare"
 
     echo "Done upgrading Libreshare"
 }
 
-function uninstallLibreshare () {
+function uninstallLibreshare() {
     echo "Going to uninstall Libreshare"
 
     echo "Done uninstalling Libreshare"
 }
 
-function backupLibreshare () {
+function backupLibreshare() {
     echo "Going to backup Libreshare"
 
     echo "Done backing up Libreshare"
 }
 
-function showAbout () {
+function showAbout() {
     echo "Libreshare Command Line Interface (sgcli.sh) in version ${LIBRESHARE_VERSION} and build number ${LIBRESHARE_BUILD_NUMBER}"
     echo "Author: ${LIBRESHARE_AUTHOR_NAME} <${LIBRESHARE_AUTHOR_EMAIL}>"
 }
 
-function showHelp () {
+function showHelp() {
     echo -e "---------------------------------------------------------------------"
     echo -e "${TITLE}Welcome to the Libreshare Command Line Interface (lscli.sh)${CLEAN}"
     echo -e "---------------------------------------------------------------------"
@@ -162,7 +174,7 @@ function showHelp () {
     echo -e ""
     echo -e "${SUBTITLE}Commands for development environment${CLEAN}"
     echo -e ""
-    echo -e "        ${COMMAND}setup${CLEAN}       Install all required tools and dependencies"
+    echo -e "        ${COMMAND}check${CLEAN}       Check if all required tools are installed"
     echo -e "        ${COMMAND}clean${CLEAN}       Clean the project"
     echo -e "        ${COMMAND}build${CLEAN}       Build the project"
     echo -e "        ${COMMAND}develop${CLEAN}     Run the development build"
@@ -195,42 +207,42 @@ pushd "$(dirname "$0")"
 command="$1"
 
 case $command in
-    setup)
-        setupProject
-        ;;
-    clean)
-        cleanProject
-        ;;
-    build)
-        buildProject
-        ;;
-    develop)
-        developProject
-        ;;
-    package)
-        packageProject
-        ;;
-    deploy)
-        deployProject
-        ;;
-    install)
-        installLibreshare
-        ;;
-    upgrade)
-        upgradeLibreshare
-        ;;
-    uninstall)
-        uninstallLibreshare
-        ;;
-    backup)
-        backupLibreshare
-        ;;
-    about)
-        showAbout
-        ;;
-    *)
-        showHelp
-        ;;
+check)
+    checkProject
+    ;;
+clean)
+    cleanProject
+    ;;
+build)
+    buildProject
+    ;;
+develop)
+    developProject
+    ;;
+package)
+    packageProject
+    ;;
+deploy)
+    deployProject
+    ;;
+install)
+    installLibreshare
+    ;;
+upgrade)
+    upgradeLibreshare
+    ;;
+uninstall)
+    uninstallLibreshare
+    ;;
+backup)
+    backupLibreshare
+    ;;
+about)
+    showAbout
+    ;;
+*)
+    showHelp
+    ;;
 esac
 
 # Change back to the original directory
