@@ -48,7 +48,7 @@ spec:
         tier: postgresql
     spec:
       containers:
-        - image: postgres:13-alpine
+        - image: postgres:12-alpine
           name: postgresql
           env:
             - name: POSTGRES_DB
