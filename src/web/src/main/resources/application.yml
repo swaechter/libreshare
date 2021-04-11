@@ -29,7 +29,7 @@ micronaut:
         http-method: GET
         access:
           - isAnonymous()
-      - pattern: /swagger-ui
+      - pattern: /swagger-ui/*
         http-method: GET
         access:
           - isAnonymous()

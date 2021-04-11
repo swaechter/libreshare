@@ -1,0 +1,9 @@
+libreshare:
+  web:
+    secret: 90hjk2hhewkj3khe2wsg23w7863st83i48zrpg5br4keds23w7es6ds13y673kjhe21es823w7838ws1tg3s7a23872<g25wg65g1ag565
+  database:
+    hostname: "localhost"
+    port: 5432
+    name: "secasignbox"
+    username: "secasignbox"
+    password: "123456aA"

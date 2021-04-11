@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 )
 public class WebApplication {
 
-    public static void main(String[] args) {
-        Micronaut.run(WebApplication.class, args);
+    public static void main(String[] arguments) {
+        Micronaut.build(arguments).mainClass(WebApplication.class).banner(false).start();
     }
 }

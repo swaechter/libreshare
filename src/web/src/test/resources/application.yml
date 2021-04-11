@@ -1,11 +1,6 @@
-libreshare:
-  web:
-    secret: k2kjeueeushj2h3jjheshushhuih2hi2hh3hehshahh1h1ehwh2iehhshahhithdiuehwi
-  database:
-    hostname: unused
-    port: 0
-    name: libreshare
-    username: libreshare
-    password: 123456aA
 server:
   port: 9999
+datasources:
+  default:
+    url: jdbc:tc:postgresql:12:///postgres
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
