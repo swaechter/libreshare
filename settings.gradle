@@ -1,0 +1,3 @@
+include ':web'
+
+project(':web').projectDir = "$rootDir/src/web" as File
