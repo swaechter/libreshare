@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "server": {
+        "port": 9999
+    },
+    "database" : {
+        "hostname" : "localhost",
+        "port" : 5432,
+        "database" : "libreshare",
+        "username" : "libreshare",
+        "password" : "123456aA"
+    }
+}

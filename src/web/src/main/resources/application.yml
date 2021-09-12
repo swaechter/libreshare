@@ -2,7 +2,7 @@ micronaut:
   application:
     name: libreshare
   server:
-    port: 9999
+    port: ${server.port}
     maxRequestSize: 100MB
     multipart:
       maxFileSize: 100MB
@@ -27,10 +27,10 @@ micronaut:
           - isAnonymous()
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/libreshare
+    url: jdbc:postgresql://${database.hostname}:${database.port}/${database.database}
     driverClassName: org.postgresql.Driver
-    username: libreshare
-    password: 123456aA
+    username: ${database.username}
+    password: ${database.password}
     dialect: POSTGRES
 flyway:
   datasources:
