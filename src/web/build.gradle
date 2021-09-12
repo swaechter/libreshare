@@ -24,10 +24,10 @@ dependencies {
     annotationProcessor("io.micronaut:micronaut-management")
 
     // Web security
-    //annotationProcessor("io.micronaut.security:micronaut-security-annotations")
-    //implementation("io.micronaut.security:micronaut-security")
-    //implementation("io.micronaut.security:micronaut-security-jwt")
-    //implementation("org.mindrot:jbcrypt:0.4")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("org.mindrot:jbcrypt:0.4")
 
     // Web OpenAPI
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
@@ -51,6 +51,11 @@ dependencies {
 application {
     mainClass.set("ch.swaechter.libreshare.web.Application")
 }
+
+tasks.distZip.enabled = false
+tasks.distTar.enabled = false
+tasks.shadowDistZip.enabled = false
+tasks.shadowDistTar.enabled = false
 
 tasks.withType(JavaCompile) {
     options.fork = true
