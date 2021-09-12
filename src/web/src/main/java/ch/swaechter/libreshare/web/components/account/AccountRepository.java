@@ -8,8 +8,19 @@ import io.micronaut.data.repository.CrudRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Manage the account access to the SQL server.
+ *
+ * @author Simon Wächter
+ */
 @JdbcRepository(dialect = Dialect.POSTGRES)
 public interface AccountRepository extends CrudRepository<Account, UUID> {
 
-    Optional<Account> findByUserName(String userName);
+    /**
+     * Find an optional account by username.
+     *
+     * @param username Username of the account
+     * @return Optional account
+     */
+    Optional<Account> findByUsername(String username);
 }

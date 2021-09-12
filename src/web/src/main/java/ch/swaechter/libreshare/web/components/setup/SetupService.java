@@ -8,47 +8,60 @@ import io.micronaut.runtime.server.event.ServerStartupEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Random;
-
+/**
+ * Responsible for setting up the initial configuration and account.
+ *
+ * @author Simon Wächter
+ */
 @Context
 public class SetupService implements ApplicationEventListener<ServerStartupEvent> {
 
+    /**
+     * Logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(SetupService.class);
 
+    /**
+     * Event service to publish new events.
+     */
     private final EventService eventService;
 
+    /**
+     * Account service to create an initial account.
+     */
     private final AccountService accountService;
 
+    /**
+     * Create a new setup service.
+     *
+     * @param eventService   Event service to publish new events
+     * @param accountService Account service to create an initial account
+     */
     public SetupService(EventService eventService, AccountService accountService) {
         this.eventService = eventService;
         this.accountService = accountService;
     }
 
+    /**
+     * Create the initial account on server startup if none exists.
+     *
+     * @param event Micronaut event
+     */
     @Override
     public void onApplicationEvent(ServerStartupEvent event) {
         // Create an initial account if no account exists
         if (accountService.getNumberOfAccounts() == 0) {
             try {
                 logger.info("Creating initial account");
-                String userName = "admin";
+                String username = "admin";
                 String emailAddress = "admin@invalid.com";
-                String password = generatePassword();
-                accountService.createInitialAccount(userName, emailAddress, password);
-                logger.info("Initial setup account created. Login name is {} and password {}", userName, password);
-                eventService.addEvent("Initial setup account " + userName + " was created");
+                String password = accountService.generatePassword();
+                accountService.createAccount(username, emailAddress, password);
+                logger.info("Initial setup account created. Login name is {} and password {}", username, password);
+                eventService.addEvent("Initial setup account " + username + " was created");
             } catch (Exception exception) {
                 logger.error("Unable to create setup account: " + exception.getMessage());
             }
         }
-    }
-
-    private String generatePassword() {
-        byte[] data = new byte[24];
-        Random random = new SecureRandom();
-        random.nextBytes(data);
-        return Base64.getEncoder().encodeToString(Base64.getEncoder().encodeToString(data).getBytes(StandardCharsets.UTF_8));
     }
 }

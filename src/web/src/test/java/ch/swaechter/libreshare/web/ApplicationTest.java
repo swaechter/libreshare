@@ -13,13 +13,26 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Integration test for the full application. Internally a PostgreSQL testcontainer is started.
+ *
+ * @author Simon Wächter
+ */
 @MicronautTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ApplicationTest implements TestPropertyProvider {
 
+    /**
+     * Application that is started.
+     */
     @Inject
     private EmbeddedApplication<?> application;
 
+    /**
+     * Provide a property configuration that contains the testcontainer JDBC configuration.
+     *
+     * @return Property configuration
+     */
     @NonNull
     @Override
     public Map<String, String> getProperties() {
@@ -29,6 +42,9 @@ public class ApplicationTest implements TestPropertyProvider {
         return properties;
     }
 
+    /**
+     * Regular test to check if the application can be started.
+     */
     @Test
     void testItWorks() {
         assertTrue(application.isRunning());

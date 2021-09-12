@@ -9,6 +9,11 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 import java.io.File;
 
+/**
+ * Main entry point of the application.
+ *
+ * @author Simon Wächter
+ */
 @OpenAPIDefinition(
     info = @Info(
         title = "Libreshare",
@@ -23,6 +28,11 @@ import java.io.File;
 )
 public class Application {
 
+    /**
+     * Main entry point of the application that loads the JSON configuration file.
+     *
+     * @param arguments One argument that points to the JSON configuration file
+     */
     public static void main(String[] arguments) {
         // Check the command arguments
         if (arguments.length != 1) {
