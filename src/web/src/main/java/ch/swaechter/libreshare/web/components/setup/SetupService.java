@@ -1,6 +1,7 @@
 package ch.swaechter.libreshare.web.components.setup;
 
 import ch.swaechter.libreshare.web.components.account.AccountService;
+import ch.swaechter.libreshare.web.components.event.EventService;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
@@ -17,9 +18,12 @@ public class SetupService implements ApplicationEventListener<ServerStartupEvent
 
     private static final Logger logger = LoggerFactory.getLogger(SetupService.class);
 
+    private final EventService eventService;
+
     private final AccountService accountService;
 
-    public SetupService(AccountService accountService) {
+    public SetupService(EventService eventService, AccountService accountService) {
+        this.eventService = eventService;
         this.accountService = accountService;
     }
 
@@ -34,6 +38,7 @@ public class SetupService implements ApplicationEventListener<ServerStartupEvent
                 String password = generatePassword();
                 accountService.createInitialAccount(userName, emailAddress, password);
                 logger.info("Initial setup account created. Login name is {} and password {}", userName, password);
+                eventService.addEvent("Initial setup account " + userName + " was created");
             } catch (Exception exception) {
                 logger.error("Unable to create setup account: " + exception.getMessage());
             }

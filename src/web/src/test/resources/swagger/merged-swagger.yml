@@ -32,6 +32,11 @@ paths:
 components:
   schemas:
     AccessTokenDto:
+      required:
+        - username
+        - access_token
+        - token_type
+        - expires_in
       type: object
       properties:
         username:
@@ -50,6 +55,9 @@ components:
           format: int32
       description: Represents a JWT access token
     AccountLoginDto:
+      required:
+        - username
+        - password
       type: object
       properties:
         username:
