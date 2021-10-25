@@ -37,6 +37,7 @@ public class ApplicationTest implements TestPropertyProvider {
     @Override
     public Map<String, String> getProperties() {
         Map<String, String> properties = new LinkedHashMap<>();
+        properties.put("micronaut.config.files", "src/test/resources/application-test.json");
         properties.put("datasources.default.url", "jdbc:tc:postgresql:13:///postgres");
         properties.put("datasources.default.driverClassName", "org.testcontainers.jdbc.ContainerDatabaseDriver");
         return properties;

@@ -1,6 +1,7 @@
 package ch.swaechter.libreshare.web.components.setup;
 
 import ch.swaechter.libreshare.web.components.account.AccountService;
+import ch.swaechter.libreshare.web.components.account.dto.CreateAccountDto;
 import ch.swaechter.libreshare.web.components.event.EventService;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.event.ApplicationEventListener;
@@ -53,12 +54,10 @@ public class SetupService implements ApplicationEventListener<ServerStartupEvent
         if (accountService.getNumberOfAccounts() == 0) {
             try {
                 logger.info("Creating initial account");
-                String username = "admin";
-                String emailAddress = "admin@invalid.com";
-                String password = accountService.generatePassword();
-                accountService.createAccount(username, emailAddress, password);
-                logger.info("Initial setup account created. Login name is {} and password {}", username, password);
-                eventService.addEvent("Initial setup account " + username + " was created");
+                CreateAccountDto createAccountDto = new CreateAccountDto("admin", "admin@invalid.com", accountService.generatePassword());
+                accountService.createAccount(createAccountDto);
+                logger.info("Initial setup account created. Login name is {} and password {}", createAccountDto.getUsername(), createAccountDto.getPlaintextPassword());
+                eventService.addEvent("Initial setup account " + createAccountDto.getUsername() + " was created");
             } catch (Exception exception) {
                 logger.error("Unable to create setup account: " + exception.getMessage());
             }
