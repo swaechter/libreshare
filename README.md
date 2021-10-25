@@ -6,7 +6,7 @@ Libreshare is a small web based file synchronization like Nextcloud.
 
 ## Instructions
 
-Build requirements: `Java 11+ JDK, Docker, PostgreSQL`
+Build requirements: `Java 17+ JDK, Docker, PostgreSQL`
 
 Commands:
 
