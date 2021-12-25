@@ -8,7 +8,7 @@ package ch.swaechter.libreshare.web.utils.globals;
 public class Globals {
 
     /**
-     * Version of Libreshare.
+     * Version of LibreShare.
      */
     public static final String LIBRESHARE_VERSION = "0.0.1";
 

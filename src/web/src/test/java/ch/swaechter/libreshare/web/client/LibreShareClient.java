@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Singleton
 @Client("${libreshare.client.url}")
-public interface LibreshareClient {
+public interface LibreShareClient {
 
     /**
      * Login to get a new JWT token.

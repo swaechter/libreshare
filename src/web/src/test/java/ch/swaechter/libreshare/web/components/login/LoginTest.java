@@ -1,6 +1,6 @@
 package ch.swaechter.libreshare.web.components.login;
 
-import ch.swaechter.libreshare.web.client.LibreshareClient;
+import ch.swaechter.libreshare.web.client.LibreShareClient;
 import ch.swaechter.libreshare.web.components.account.dto.AuthenticationDto;
 import ch.swaechter.libreshare.web.components.account.dto.ReadAccountDto;
 import ch.swaechter.libreshare.web.components.account.dto.TokenDto;
@@ -27,7 +27,7 @@ public class LoginTest {
      * HTTP client used for the backend communication.
      */
     @Inject
-    private LibreshareClient client;
+    private LibreShareClient client;
 
     /**
      * Test the login and authentication functionality.

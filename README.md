@@ -1,8 +1,8 @@
-# Libreshare
+# LibreShare
 
 ## Introduction
 
-Libreshare is a small web based file synchronization like Nextcloud.
+LibreShare is a small web based file synchronization like Nextcloud.
 
 ## Instructions
 

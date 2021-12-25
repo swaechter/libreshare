@@ -29,7 +29,7 @@ public class AccountService {
     /**
      * Name used to issue JWT tokens.
      */
-    private static final String JWT_ISSUER = "Libreshare";
+    private static final String JWT_ISSUER = "LibreShare";
 
     /**
      * Validity duration of a JWT token in milliseconds.

@@ -16,7 +16,7 @@ import java.io.File;
  */
 @OpenAPIDefinition(
     info = @Info(
-        title = "Libreshare",
+        title = "LibreShare",
         version = Globals.LIBRESHARE_VERSION
     )
 )
