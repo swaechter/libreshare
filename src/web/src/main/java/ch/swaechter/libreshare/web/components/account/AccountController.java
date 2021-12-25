@@ -29,8 +29,16 @@ import java.util.UUID;
 @Validated
 public class AccountController {
 
+    /**
+     * Account service to manage the accounts.
+     */
     private final AccountService accountService;
 
+    /**
+     * Create a new account controller.
+     *
+     * @param accountService Account service to manage the accounts
+     */
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }

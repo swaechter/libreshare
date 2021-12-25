@@ -27,7 +27,7 @@ micronaut:
         signatures:
           secret:
             generator:
-              secret: ${security.secret}
+              secret: ${server.secret}
               jws-algorithm: HS512
     endpoints:
       login:

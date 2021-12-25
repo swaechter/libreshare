@@ -1,0 +1,12 @@
+micronaut:
+  server:
+    port: 9998
+  config:
+    files: src/test/resources/application-test.json
+datasources:
+  default:
+    url: jdbc:tc:postgresql:13:///postgres
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+libreshare:
+  client:
+    url: http://localhost:9998

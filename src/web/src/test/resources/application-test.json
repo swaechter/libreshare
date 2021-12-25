@@ -1,16 +1,13 @@
 {
-    "version": 1,
     "server": {
-        "port": 9998
-    },
-    "security": {
-        "secret": "uXrhbU9Klyls3jlsjkl21jkls1234r57ru4dj42d34rjkly5jkyyj237349shkly5jklH4jEEBzx89jkl5jkl6jkljklujkljkl3j34jk5jjkljkl3jkljkl45jkl5jkljkl65jkljkljkljkljkl24jkl24jkljx77wv904kXmbvCZw2TEp"
+        "port": -1,
+        "secret": "uXrhbU9KPyls3jlsjkl21jkls1234r57ru4dj42d34rjkly5jkyyj237349shkly5jklH4jEEBzx89jkl5jkl6jkljkl3jkljkl3j34jk5jjkljkl3jkljkl45jkl5jkljkl65jkljkljkljkljkl24jkl24jkljo77wv904kXmbvCZw2TEp"
     },
     "database" : {
-        "hostname" : "unused",
+        "hostname" : "notused",
         "port" : -1,
-        "database" : "unused",
-        "username" : "unused",
-        "password" : "unused"
+        "database" : "notused",
+        "username" : "notused",
+        "password" : "notused"
     }
 }

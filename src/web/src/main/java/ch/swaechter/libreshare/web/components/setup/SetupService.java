@@ -54,10 +54,10 @@ public class SetupService implements ApplicationEventListener<ServerStartupEvent
         if (accountService.getNumberOfAccounts() == 0) {
             try {
                 logger.info("Creating initial account");
-                CreateAccountDto createAccountDto = new CreateAccountDto("admin", "admin@invalid.com", accountService.generatePassword());
+                CreateAccountDto createAccountDto = new CreateAccountDto("admin", "admin@invalid.com", "123456aAbB");
                 accountService.createAccount(createAccountDto);
-                logger.info("Initial setup account created. Login name is {} and password {}", createAccountDto.getUsername(), createAccountDto.getPlaintextPassword());
-                eventService.addEvent("Initial setup account " + createAccountDto.getUsername() + " was created");
+                logger.info("Initial setup account created. Login name is {} and password {}", createAccountDto.username(), createAccountDto.plaintextPassword());
+                eventService.addEvent("Initial setup account " + createAccountDto.username() + " was created");
             } catch (Exception exception) {
                 logger.error("Unable to create setup account: " + exception.getMessage());
             }

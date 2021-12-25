@@ -27,7 +27,7 @@ dependencies {
     // Web security
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut.security:micronaut-security")
-    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("com.auth0:java-jwt:3.18.2")
     implementation("org.mindrot:jbcrypt:0.4")
 
     // Web OpenAPI
@@ -56,7 +56,6 @@ application {
 tasks.withType(JavaCompile) {
     options.fork = true
     options.forkOptions.jvmArgs << "-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop"
-    options.forkOptions.jvmArgs << "-Dmicronaut.openapi.additional.files=src/test/resources/swagger"
     options.forkOptions.jvmArgs << "-Dfile.encoding=UTF8"
 }
 
