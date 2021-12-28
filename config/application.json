@@ -4,11 +4,16 @@
         "port": 9999,
         "secret": "uXrhbU9KPyls3jlsjkl21jkls1234r57ru4dj42d34rjkly5jkyyj237349shkly5jklH4jEEBzx89jkl5jkl6jkljkl3jkljkl3j34jk5jjkljkl3jkljkl45jkl5jkljkl65jkljkljkljkljkl24jkl24jkljo77wv904kXmbvCZw2TEp"
     },
-    "database" : {
+    "databaseSettings" : {
         "hostname" : "localhost",
         "port" : 5432,
         "database" : "libreshare",
         "username" : "libreshare",
         "password" : "123456aA"
+    },
+    "componentSettings": {
+        "shareSettings" : {
+            "path": "share"
+        }
     }
 }

@@ -1,13 +1,19 @@
 {
-    "server": {
-        "port": -1,
-        "secret": "uXrhbU9KPyls3jlsjkl21jkls1234r57ru4dj42d34rjkly5jkyyj237349shkly5jklH4jEEBzx89jkl5jkl6jkljkl3jkljkl3j34jk5jjkljkl3jkljkl45jkl5jkljkl65jkljkljkljkljkl24jkl24jkljo77wv904kXmbvCZw2TEp"
-    },
-    "database" : {
-        "hostname" : "notused",
-        "port" : -1,
-        "database" : "notused",
-        "username" : "notused",
-        "password" : "notused"
+  "version" : 1,
+  "server" : {
+    "port" : -1,
+    "secret" : "uXrhbU9KPyls3jlsjkl21jkls1234r57ru4dj42d34rjkly5jkyyj237349shkly5jklH4jEEBzx89jkl5jkl6jkljkl3jkljkl3j34jk5jjkljkl3jkljkl45jkl5jkljkl65jkljkljkljkljkl24jkl24jkljo77wv904kXmbvCZw2TEp"
+  },
+  "databaseSettings" : {
+    "hostname" : "hostnameisnotused",
+    "port" : -1,
+    "database" : "databaseisnotused",
+    "username" : "usernameisnotused",
+    "password" : "passwordisnotused"
+  },
+  "componentSettings" : {
+    "shareSettings" : {
+      "path" : "../../src/web/src/test/resources/share"
     }
+  }
 }

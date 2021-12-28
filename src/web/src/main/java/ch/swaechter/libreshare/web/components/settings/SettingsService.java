@@ -11,8 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 /**
- * Read the JSON settings file and inject it into the Micronaut context. Also provide the ability to update the
- * settings file.
+ * Read the JSON settings file and provide the ability to update the settings file.
  *
  * @author Simon Wächter
  */
@@ -21,7 +20,7 @@ import java.nio.file.StandardCopyOption;
 public class SettingsService {
 
     /**
-     * Object mapper used to read and write the JSON configuration.
+     * Object mapper used to read and write the JSON settings.
      */
     private final ObjectMapper objectMapper;
 
@@ -36,9 +35,9 @@ public class SettingsService {
     private final Settings settings;
 
     /**
-     * Create a new settings service that loads the JSON settings file and injects it into the Micronaut context.
+     * Create a new settings service that loads the JSON settings file.
      *
-     * @param objectMapper Object mapper used to read and write the JSON configuration
+     * @param objectMapper Object mapper used to read and write the JSON settings
      * @param path         Path of the JSON settings file
      * @throws ServerException Exception in case of an IO or serialization issue
      */

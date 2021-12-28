@@ -47,10 +47,10 @@ micronaut:
           - isAnonymous()
 datasources:
   default:
-    url: jdbc:postgresql://${database.hostname}:${database.port}/${database.database}
+    url: jdbc:postgresql://${databaseSettings.hostname}:${databaseSettings.port}/${databaseSettings.database}
     driverClassName: org.postgresql.Driver
-    username: ${database.username}
-    password: ${database.password}
+    username: ${databaseSettings.username}
+    password: ${databaseSettings.password}
     dialect: POSTGRES
 flyway:
   datasources:

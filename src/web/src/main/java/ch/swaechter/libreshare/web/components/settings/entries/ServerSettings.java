@@ -21,7 +21,7 @@ public class ServerSettings {
     private String secret;
 
     /**
-     * Create an empty server object.
+     * Create an empty server settings object.
      */
     public ServerSettings() {
     }
